@@ -14,7 +14,7 @@
 
     <body>
         <div class="container">
-            <h1>Hello Security</h1>
+            <h1>Admin Panel</h1>
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
@@ -35,7 +35,7 @@
                     </span>
                 </ul>    
             </div>
-            <h2>Admin Page</h2>
+
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" method="POST" action="/logout">
                     <input type="hidden" 
@@ -177,7 +177,13 @@
                     <span class="badge badge-success"><a href="#"  th:text="${tag.hashTag}"></a></span>
                 </span> 
                 <div> 
+                    <span>Publication Date</span>
                     <span class="badge" th:text="${blog.dateOfShow}"></span>
+                </div>
+
+                <div> 
+                    <span>Expiration Date</span>
+                    <span class="badge" th:text="${blog.expirationDate}"></span>
                 </div>
 
                 <div> 
