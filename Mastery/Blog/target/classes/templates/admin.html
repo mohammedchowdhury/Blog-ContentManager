@@ -154,9 +154,6 @@
             <br></br>
             <h1>Blogs and Static Pages</h1>
             <div th:each="blog : ${blogs}">
-                <div th:if="${blog.imageLink != null}">
-                    <img id = "picture" th:src="${blog.imageLink}"  height="300"></img>	
-                </div>
 
                 <h1 id="blogTitle" th:text="${blog.title}"></h1>
                 <p id="blogText" th:utext="${blog.blogText}"></p>

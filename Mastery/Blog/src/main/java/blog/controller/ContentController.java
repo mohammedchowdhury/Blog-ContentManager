@@ -26,10 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
-
-
 @Controller
 public class ContentController {
 
@@ -42,9 +38,9 @@ public class ContentController {
     @Autowired
     UserDao userDao;
 
-    Set<ConstraintViolation<Tag>> violations = new HashSet<>();
-    
-   
+    Set<ConstraintViolation<Tag>> violationsTag = new HashSet<>();
+
+    Set<ConstraintViolation<Blog>> violationsBlog = new HashSet<>();
 
     @GetMapping("/content")
     public String displayContentPage(Model model) {
@@ -56,7 +52,8 @@ public class ContentController {
         model.addAttribute("staticPage", listOfStaticPage);
 
         //added for errors
-        model.addAttribute("errors", violations);
+        model.addAttribute("errors", violationsTag);
+        model.addAttribute("errorsBlog", violationsBlog);
 
         model.addAttribute("tags", listOfTags);
         model.addAttribute("users", listOfUsers);
@@ -65,9 +62,7 @@ public class ContentController {
     }
 
     @PostMapping("addBlog")
-    public String addBlog(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
-        //String fileLocation = imageDao.saveImage(file, Long.toString(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)), TEACHER_UPLOAD_DIR);
-        String a = "a";
+    public String addBlog(HttpServletRequest request) {
         String title = request.getParameter("title");
         String blogText = request.getParameter("blogInput");
         String expirationDate = request.getParameter("dateOfExpiration");
@@ -139,13 +134,13 @@ public class ContentController {
         ///validate tags here 
 
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-        violations = validate.validate(tag);
+        violationsTag = validate.validate(tag);
 
-        if (violations.isEmpty()) {
+        if (violationsTag.isEmpty()) {
             tagDao.createTag(tag);
         }
-        
-          //tagDao.createTag(tag);
+
+        //tagDao.createTag(tag);
         return "redirect:/content";
     }
 

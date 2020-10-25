@@ -159,9 +159,7 @@ public class AdminController {
     }
 
     @PostMapping("editBlog")
-    public String performEditBlog(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
-        //String fileLocation = imageDao.saveImage(file, Long.toString(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)), TEACHER_UPLOAD_DIR);
-
+    public String performEditBlog(HttpServletRequest request) {
         String title = request.getParameter("title");
         String blogText = request.getParameter("blogInput");
         String expirationDate = request.getParameter("dateOfExpiration");
