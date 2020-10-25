@@ -92,9 +92,9 @@ public class BlogDaoDB implements BlogDao {
 
     @Override
     public void updateBlog(Blog blog) {
-        final String UPDATE_BLOG = "UPDATE BLOG SET TITLE = ? , BLOGTEXT = ? , DATEOFSHOW = ? , EXPIRATION = ? , IMAGE = ? , BLOGVARIFIED = ? , STATIC = ? , USERID = ? "
+        final String UPDATE_BLOG = "UPDATE BLOG SET TITLE = ? , BLOGTEXT = ? , DATEOFSHOW = ? , EXPIRATION = ? , BLOGVARIFIED = ? , STATIC = ? , USERID = ? "
                 + "WHERE BLOGID = ?";
-        jdbc.update(UPDATE_BLOG, blog.getTitle(), blog.getBlogText(), blog.getDateOfShow(), blog.getExpirationDate(), blog.getImageLink(), blog.isVarified(), blog.isStaticPage(), blog.getUserID(), blog.getBlogID());
+        jdbc.update(UPDATE_BLOG, blog.getTitle(), blog.getBlogText(), blog.getDateOfShow(), blog.getExpirationDate(), blog.isVarified(), blog.isStaticPage(), blog.getUserID(), blog.getBlogID());
 
         final String DELETE_TAGS_BLOG = "DELETE FROM TAGS_BLOG WHERE BLOGID = ?";
         jdbc.update(DELETE_TAGS_BLOG, blog.getBlogID());
@@ -110,8 +110,8 @@ public class BlogDaoDB implements BlogDao {
     @Override
     @Transactional
     public Blog createBlog(Blog blog) {
-        final String INSERT_BLOG = "INSERT INTO BLOG(TITLE,BLOGTEXT,DATEOFSHOW,EXPIRATION,IMAGE,BLOGVARIFIED,STATIC,USERID) VALUES(?,?,?,?,?,?,?,?) ";
-        jdbc.update(INSERT_BLOG, blog.getTitle(), blog.getBlogText(), blog.getDateOfShow(), blog.getExpirationDate(), blog.getImageLink(), blog.isVarified(), blog.isStaticPage(), blog.getUserID());
+        final String INSERT_BLOG = "INSERT INTO BLOG(TITLE,BLOGTEXT,DATEOFSHOW,EXPIRATION,BLOGVARIFIED,STATIC,USERID) VALUES(?,?,?,?,?,?,?) ";
+        jdbc.update(INSERT_BLOG, blog.getTitle(), blog.getBlogText(), blog.getDateOfShow(), blog.getExpirationDate(), blog.isVarified(), blog.isStaticPage(), blog.getUserID());
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
         blog.setBlogID(newId);
 
@@ -145,8 +145,7 @@ public class BlogDaoDB implements BlogDao {
                 blog.setExpirationDate(null);
             }
            
-            
-            blog.setImageLink(rs.getString("IMAGE"));
+          
             blog.setVarified(rs.getBoolean("BLOGVARIFIED"));
             blog.setStaticPage(rs.getBoolean("STATIC"));
             blog.setUserID(rs.getInt("USERID"));

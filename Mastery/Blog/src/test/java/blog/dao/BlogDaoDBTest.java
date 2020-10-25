@@ -87,7 +87,6 @@ public class BlogDaoDBTest {
         blog.setBlogText("Terrible blog");
         blog.setDateOfShow(LocalDate.parse("2020-10-18"));
         blog.setExpirationDate(LocalDate.parse("2020-10-20"));
-        blog.setImageLink("/Food.jpg");
         blog.setVarified(true);
         blog.setStaticPage(true);
         blog.setUserID(user.getId());
@@ -123,7 +122,7 @@ public class BlogDaoDBTest {
         blog.setBlogText("Blog Blog Blog");
         blog.setDateOfShow(LocalDate.parse("2020-10-26"));
         blog.setExpirationDate(LocalDate.parse("2020-10-30"));
-        blog.setImageLink("/Food.jpg");
+        
         blog.setVarified(true);
         blog.setStaticPage(true);
         blog.setUserID(user.getId());
@@ -159,7 +158,7 @@ public class BlogDaoDBTest {
         blog.setBlogText("Blog Blog Blog");
         blog.setDateOfShow(LocalDate.parse("2020-10-26"));
         blog.setExpirationDate(LocalDate.parse("2020-10-30"));
-        blog.setImageLink("/Food.jpg");
+       
         blog.setVarified(true);
         blog.setStaticPage(true);
         blog.setUserID(user.getId());
@@ -170,7 +169,7 @@ public class BlogDaoDBTest {
         blog2.setBlogText("Blog Blog Blog");
         blog2.setDateOfShow(LocalDate.parse("2020-10-26"));
         blog2.setExpirationDate(LocalDate.parse("2020-10-30"));
-        blog2.setImageLink("/Food.jpg");
+      
         blog2.setVarified(true);
         blog2.setStaticPage(true);
         blog2.setUserID(user.getId());
@@ -212,7 +211,7 @@ public class BlogDaoDBTest {
         blog.setBlogText("Blog Blog Blog");
         blog.setDateOfShow(LocalDate.parse("2020-10-26"));
         blog.setExpirationDate(LocalDate.parse("2020-10-30"));
-        blog.setImageLink("/Food.jpg");
+       
         blog.setVarified(true);
         blog.setStaticPage(true);
         blog.setUserID(user.getId());
@@ -249,7 +248,7 @@ public class BlogDaoDBTest {
         blog.setBlogText("Terrible blog");
         blog.setDateOfShow(LocalDate.parse("2020-10-18"));
         blog.setExpirationDate(LocalDate.parse("2020-10-20"));
-        blog.setImageLink("/Food.jpg");
+       
         blog.setVarified(true);
         blog.setStaticPage(true);
         blog.setUserID(user.getId());
@@ -257,7 +256,7 @@ public class BlogDaoDBTest {
         blog = blogDao.createBlog(blog);
         //updating blog
         blog.setBlogText("BlogBlog");
-        blog.setImageLink("/Chips.jpg");
+       
         //act 
         blogDao.updateBlog(blog);
         Blog newBlog = blogDao.getBlogById(blog.getBlogID());
@@ -289,7 +288,7 @@ public class BlogDaoDBTest {
         blog.setBlogText("Blog Blog Blog");
         blog.setDateOfShow(LocalDate.parse("2020-10-26"));
         blog.setExpirationDate(LocalDate.parse("2020-10-30"));
-        blog.setImageLink("/Food.jpg");
+      
         blog.setVarified(false);
         blog.setStaticPage(true);
         blog.setUserID(user.getId());
@@ -300,7 +299,7 @@ public class BlogDaoDBTest {
         blog2.setBlogText("Blog Blog Blog");
         blog2.setDateOfShow(LocalDate.parse("2020-10-26"));
         blog2.setExpirationDate(LocalDate.parse("2020-10-30"));
-        blog2.setImageLink("/Food.jpg");
+       
         blog2.setVarified(true);
         blog2.setStaticPage(true);
         blog2.setUserID(user.getId());
@@ -341,7 +340,7 @@ public class BlogDaoDBTest {
         blog.setBlogText("Blog Blog Blog");
         blog.setDateOfShow(LocalDate.parse("2020-10-26"));
         blog.setExpirationDate(LocalDate.parse("2020-10-30"));
-        blog.setImageLink("/Food.jpg");
+      
         blog.setVarified(true);
         blog.setStaticPage(true);
         blog.setUserID(user.getId());
@@ -352,7 +351,7 @@ public class BlogDaoDBTest {
         blog2.setBlogText("Blog Blog Blog");
         blog2.setDateOfShow(LocalDate.parse("2020-10-26"));
         blog2.setExpirationDate(LocalDate.parse("2020-10-30"));
-        blog2.setImageLink("/Food.jpg");
+       
         blog2.setVarified(true);
         blog2.setStaticPage(true);
         blog2.setUserID(user.getId());

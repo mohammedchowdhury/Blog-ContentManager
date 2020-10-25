@@ -20,7 +20,6 @@ public class Blog {
     private String blogText;
     private LocalDate expirationDate;
     private LocalDate dateOfShow;
-    private String imageLink;
     private boolean varified; 
     private boolean  staticPage; 
     private int userID; 
@@ -67,14 +66,6 @@ public class Blog {
         this.dateOfShow = dateOfShow;
     }
 
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
-    }
-
     public boolean isVarified() {
         return varified;
     }
@@ -115,7 +106,6 @@ public class Blog {
         hash = 97 * hash + Objects.hashCode(this.blogText);
         hash = 97 * hash + Objects.hashCode(this.expirationDate);
         hash = 97 * hash + Objects.hashCode(this.dateOfShow);
-        hash = 97 * hash + Objects.hashCode(this.imageLink);
         hash = 97 * hash + (this.varified ? 1 : 0);
         hash = 97 * hash + (this.staticPage ? 1 : 0);
         hash = 97 * hash + this.userID;
@@ -153,9 +143,6 @@ public class Blog {
         if (!Objects.equals(this.blogText, other.blogText)) {
             return false;
         }
-        if (!Objects.equals(this.imageLink, other.imageLink)) {
-            return false;
-        }
         if (!Objects.equals(this.expirationDate, other.expirationDate)) {
             return false;
         }
@@ -170,6 +157,6 @@ public class Blog {
 
     @Override
     public String toString() {
-        return "Blog{" + "blogID=" + blogID + ", title=" + title + ", blogText=" + blogText + ", expirationDate=" + expirationDate + ", dateOfShow=" + dateOfShow + ", imageLink=" + imageLink + ", varified=" + varified + ", staticPage=" + staticPage + ", userID=" + userID + ", listOfTags=" + listOfTags + '}';
+        return "Blog{" + "blogID=" + blogID + ", title=" + title + ", blogText=" + blogText + ", expirationDate=" + expirationDate + ", dateOfShow=" + dateOfShow + ", varified=" + varified + ", staticPage=" + staticPage + ", userID=" + userID + ", listOfTags=" + listOfTags + '}';
     }
 }

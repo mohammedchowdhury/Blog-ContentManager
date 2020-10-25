@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: blog.dao.TagDaoDBTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.189 s - in blog.dao.TagDaoDBTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.846 s - in blog.dao.TagDaoDBTest
