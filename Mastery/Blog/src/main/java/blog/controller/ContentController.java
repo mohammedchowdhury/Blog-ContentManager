@@ -89,16 +89,17 @@ public class ContentController {
         LocalDate Exdate;
         try {
             Exdate = LocalDate.parse(expirationDate);
+            
         } catch (Exception e) {
-            Exdate = null;
+            LocalDate today = LocalDate.now();
+            Exdate = today.plusDays(30);
         }
         blog.setExpirationDate(Exdate);
-
         LocalDate Showdate;
         try {
             Showdate = LocalDate.parse(dateOfShow);
         } catch (Exception e) {
-            Showdate = null;
+            Showdate = LocalDate.now();
         }
         blog.setDateOfShow(Showdate);
 
@@ -127,9 +128,8 @@ public class ContentController {
         if (violationsBlog.isEmpty()) {
             blogDao.createBlog(blog);
         }
-        
-        // blogDao.createBlog(blog);
 
+        // blogDao.createBlog(blog);
         return "redirect:/content";
     }
 

@@ -1,32 +1,36 @@
 package blog.dto;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 //import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.Size;
+
 /**
  *
  * @author mohammedchowdhury
  */
 public class Blog {
-    
-
 
     private int blogID;
-   
+
     @NotBlank(message = "Title must not be blank")
     @Size(max = 100, message = "Name must be fewer than 100 characters and greater then 1 character")
-    private String title; 
+    private String title;
+    @NotBlank(message = "Blog must not be blank")
     private String blogText;
+    @Future(message = "Expiration date must be in the future")
     private LocalDate expirationDate;
+    @FutureOrPresent(message = "Date of publish must be in the future or present")
     private LocalDate dateOfShow;
-    private boolean varified; 
-    private boolean  staticPage; 
-    private int userID; 
-    private List<Tag> listOfTags; 
-    
+    private boolean varified;
+    private boolean staticPage;
+    private int userID;
+    private List<Tag> listOfTags;
 
     public int getBlogID() {
         return blogID;

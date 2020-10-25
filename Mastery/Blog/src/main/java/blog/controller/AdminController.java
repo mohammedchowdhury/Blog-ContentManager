@@ -14,6 +14,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -41,6 +44,10 @@ public class AdminController {
     @Autowired
     TagDao tagDao;
 
+    Set<ConstraintViolation<Tag>> violationsTag = new HashSet<>();
+
+    Set<ConstraintViolation<Blog>> violationsBlog = new HashSet<>();
+
     @GetMapping("/admin")
     public String displayAdminPage(Model model) {
         model.addAttribute("users", users.getAllUsers());
@@ -53,6 +60,17 @@ public class AdminController {
 
         List<Blog> getAllBlogs = blogDao.getAllBlogs();
         model.addAttribute("blogs", getAllBlogs);
+
+        //added for errors
+        if (violationsBlog.size() > 0) {
+            violationsTag.clear();
+        }
+        if (violationsTag.size() > 0) {
+            violationsBlog.clear();
+        }
+
+        model.addAttribute("errors", violationsTag);
+        model.addAttribute("errorsBlog", violationsBlog);
 
         return "admin";
     }
@@ -184,8 +202,10 @@ public class AdminController {
             LocalDate Exdate;
             try {
                 Exdate = LocalDate.parse(expirationDate);
+
             } catch (Exception e) {
-                Exdate = null;
+                LocalDate today = LocalDate.now();
+                Exdate = today.plusDays(30);
             }
             blog.setExpirationDate(Exdate);
 
@@ -193,7 +213,7 @@ public class AdminController {
             try {
                 Showdate = LocalDate.parse(dateOfShow);
             } catch (Exception e) {
-                Showdate = null;
+                Showdate = LocalDate.now();
             }
             blog.setDateOfShow(Showdate);
 
@@ -203,8 +223,10 @@ public class AdminController {
                 blog.setStaticPage(true);
             }
             List<Tag> listOfTags = new ArrayList<Tag>();
-            for (int i = 0; i < tagIDS.length; i++) {
-                listOfTags.add(tagDao.getTagById(Integer.parseInt(tagIDS[i])));
+            if (tagIDS != null) {
+                for (int i = 0; i < tagIDS.length; i++) {
+                    listOfTags.add(tagDao.getTagById(Integer.parseInt(tagIDS[i])));
+                }
             }
             blog.setListOfTags(listOfTags);
 
@@ -218,12 +240,11 @@ public class AdminController {
         }
 
         /// verify the blog herer
-//        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-//        violations = validate.validate(blog);
-//        if (violations.isEmpty()) {
-//            blogDao.createBlog(blog);
-//        }
-        blogDao.updateBlog(blog);
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violationsBlog = validate.validate(blog);
+        if (violationsBlog.isEmpty()) {
+            blogDao.updateBlog(blog);
+        }
 
         return "redirect:/admin";
     }
@@ -247,11 +268,17 @@ public class AdminController {
     public String updateTag(HttpServletRequest request) {
         String hashTag = request.getParameter("editHashTagName");
         String hashTagID = request.getParameter("HashTagid");
-        
+
         Tag tag = tagDao.getTagById(Integer.parseInt(hashTagID));
         tag.setHashTag(hashTag);
 
-        tagDao.updateTag(tag);
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violationsTag = validate.validate(tag);
+
+        if (violationsTag.isEmpty()) {
+            tagDao.updateTag(tag);
+        }
+
         return "redirect:/admin";
     }
 }
