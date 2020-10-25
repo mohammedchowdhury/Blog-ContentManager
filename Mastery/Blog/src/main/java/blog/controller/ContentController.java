@@ -52,6 +52,12 @@ public class ContentController {
         model.addAttribute("staticPage", listOfStaticPage);
 
         //added for errors
+        if (violationsBlog.size() > 0) {
+            violationsTag.clear();
+        }
+        if (violationsTag.size() > 0) {
+            violationsBlog.clear();
+        }
         model.addAttribute("errors", violationsTag);
         model.addAttribute("errorsBlog", violationsBlog);
 
@@ -116,12 +122,13 @@ public class ContentController {
         }
 
         /// verify the blog herer
-//        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-//        violations = validate.validate(blog);
-//        if (violations.isEmpty()) {
-//            blogDao.createBlog(blog);
-//        }
-        blogDao.createBlog(blog);
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violationsBlog = validate.validate(blog);
+        if (violationsBlog.isEmpty()) {
+            blogDao.createBlog(blog);
+        }
+        
+        // blogDao.createBlog(blog);
 
         return "redirect:/content";
     }

@@ -35,7 +35,6 @@ create table `BLOG`(
 `BLOGTEXT` LONGTEXT not null, 
 `DATEOFSHOW` DATE,
 `EXPIRATION` DATE,
-`IMAGE` varchar(100),
 `BLOGVARIFIED` boolean not null,
 `STATIC` boolean not null,
 `USERID` int not null,

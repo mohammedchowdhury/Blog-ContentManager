@@ -2,6 +2,8 @@ package blog.dto;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 //import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.Size;
 /**
@@ -14,8 +16,8 @@ public class Blog {
 
     private int blogID;
    
-//    @NotBlank(message = "Title must not be blank")
-//    @Size(max = 100, message = "Name must be fewer than 100 characters and greater then 1 character")
+    @NotBlank(message = "Title must not be blank")
+    @Size(max = 100, message = "Name must be fewer than 100 characters and greater then 1 character")
     private String title; 
     private String blogText;
     private LocalDate expirationDate;
