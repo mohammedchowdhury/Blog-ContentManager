@@ -46,6 +46,18 @@ public class UserDaoDB implements UserDao {
     }
 
     @Override
+    public User getActiveUserByUsername(String username) {
+        try {
+            final String SELECT_USER_BY_USERNAME = "SELECT * FROM USER WHERE USERNAME = ? AND ENABLED = 1";
+            User user = jdbc.queryForObject(SELECT_USER_BY_USERNAME, new UserMapper(), username);
+            user.setRoles(getRolesForUser(user.getId()));
+            return user;
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public List<User> getAllUsers() {
         final String SELECT_ALL_USERS = "SELECT * FROM USER";
         List<User> users = jdbc.query(SELECT_ALL_USERS, new UserMapper());
